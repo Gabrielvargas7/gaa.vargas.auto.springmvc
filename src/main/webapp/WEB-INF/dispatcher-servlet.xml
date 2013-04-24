@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	
+     <aop:aspectj-autoproxy />
+
+ <!-- Aspect declarations -->
+ 
+
+
+	<bean class="gaa.vargas.autodealer.repository.UserDaoValidateAspect" ></bean>
+    <bean class="gaa.vargas.autodealer.repository.AutoDaoValidateAspect" ></bean>
+    
+
+       <!-- End Aspect declarations -->
+
+ <!-- Datasource declaration -->
+   <bean id="userDao" class="gaa.vargas.autodealer.repository.UserDaoJdbc">
+       <property name="dataSource" ref="dataSource" />
+   </bean>
+   <bean id="authoritiesDao" class="gaa.vargas.autodealer.repository.AuthoritiesDaoJdbc">
+       <property name="dataSource" ref="dataSource" />
+   </bean>
+
+    <bean id="autoDao" class="gaa.vargas.autodealer.repository.AutoDaoJdbc">
+       <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="specDao" class="gaa.vargas.autodealer.repository.SpecDaoJdbc">
+       <property name="dataSource" ref="dataSource" />
+    </bean>
+
+<!-- End Datasource declaration-->
+  
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+        <property name="basePackage" value="gaa.vargas.autodealer"></property>
+    	<property name="caseSensitive" value="true"></property>
+    </bean>
+
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="web/admin/admin.htm">adminController</prop>
+                <prop key="index.htm">indexController</prop>
+                <prop key="login/login.htm">loginController</prop>
+                <prop key="error/errorpage.htm">errorController</prop>
+                
+                
+                <!-- Ajax Auto Complete -->
+                
+            	<prop key="ajaxAutoCompleteAutoAdd.htm">ajaxAutoCompleteAutoAddController</prop>
+            	<prop key="ajaxAutoCompleteAutoAddSetSession.htm">ajaxAutoCompleteAutoAddSetSessionController</prop>
+            	        	
+            </props>
+        </property>
+        <property name="interceptors">
+            <list>
+                 <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>
+
+ <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+
+
+<!-- Start Index Controller-->
+    <bean id="indexController" class="gaa.vargas.autodealer.web.frontend.IndexController" >
+    	<property name="autoDao" ref="autoDao"></property>
+    </bean>
+<!-- End Index Controller-->
+
+<!-- Start Admin Controller-->
+    <bean name="adminController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="web/admin/admin" />
+<!-- End Admin Controller-->
+
+<!-- Start Login Controller-->
+    <bean name="loginController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="login/login" />
+<!-- End Login Controller-->
+<!-- Start Error Controller-->
+    <bean name="errorController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="error/errorpage" />
+<!-- End Error Controller-->
+
+<!-- Start Set Language -->
+
+    <bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="cookieName" value="language" />
+        <property name="cookieMaxAge" value="3600" />
+        <property name="defaultLocale" value="en" />
+    </bean>
+
+     <bean id="localeChangeInterceptor"
+        class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="language" />
+    </bean>
+
+      <bean id="messageSource"
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+    
+    
+<!-- Start Auto Controller-->
+    <bean class="gaa.vargas.autodealer.web.admin.autos.ManagerAutosController">
+        <property name="autoDao" ref="autoDao" />
+    </bean>
+
+   <bean class="gaa.vargas.autodealer.web.admin.autos.ProcessAutoController">
+        <property name="autoDao" ref="autoDao" />
+        <property name="specDao" ref="specDao" />
+   </bean>
+
+    <bean class="gaa.vargas.autodealer.web.admin.autos.ProcessAutoAddController">
+        <property name="autoDao" ref="autoDao" />
+        <property name="specDao" ref="specDao" />
+    </bean>
+
+   <bean class="gaa.vargas.autodealer.web.admin.autos.ProcessAutoChangeController">
+        <property name="autoDao" ref="autoDao" />
+        <property name="specDao" ref="specDao" />
+    </bean>
+
+   <bean class="gaa.vargas.autodealer.web.admin.autos.ProcessAutoAddPicturesController">
+    </bean>
+
+    <bean class="gaa.vargas.autodealer.web.admin.autos.ProcessAutoDeletePicturesController">
+    </bean>
+
+
+<!-- End Autos Controller-->
+
+
+
+<!-- Start User Controller-->
+   <bean class="gaa.vargas.autodealer.web.admin.users.ManagerUsersController">
+       <property name="userDao" ref="userDao" />
+   </bean>
+
+   <bean  class="gaa.vargas.autodealer.web.admin.users.ProcessUserController">
+        <property name="authoritiesDao" ref="authoritiesDao" />
+        <property name="userDao" ref="userDao" />
+
+
+   </bean>
+   <bean class="gaa.vargas.autodealer.web.admin.users.CreateUserController">
+       <property name="userDao" ref="userDao" />
+       <property name="authoritiesDao" ref="authoritiesDao" />
+
+   </bean>
+
+   <bean class="gaa.vargas.autodealer.web.admin.users.ChangeUserController">
+        <property name="userDao" ref="userDao" />
+        <property name="authoritiesDao" ref="authoritiesDao" />
+
+   </bean>
+    <bean class="gaa.vargas.autodealer.web.admin.users.ChangePasswordUserController">
+        <property name="userDao" ref="userDao" />
+   </bean>
+
+<!-- End User Controller-->
+
+<!-- begin Frontend Controller-->
+
+	<bean class="gaa.vargas.autodealer.web.frontend.AutoDetailsController">
+		<property name="autoDao" ref="autoDao"></property>
+		<property name="specDao" ref="specDao"></property>
+	</bean>
+<!-- End Frontend Controller-->
+
+<!-- Start Autos Specification -->
+	<bean class="gaa.vargas.autodealer.web.admin.autospec.ManagerAutoSpecController">
+		<property name="specDao"  ref="specDao"></property>
+	</bean>
+	<bean class="gaa.vargas.autodealer.web.admin.autospec.ProcessAutoSpecController">
+		<property name="specDao" ref="specDao"></property>
+	</bean>
+	<bean class="gaa.vargas.autodealer.web.admin.autospec.ProcessAutoSpecAddController">
+		<property name="specDao" ref="specDao"></property>
+	</bean>
+<!-- Start Autos Specification -->
+
+
+<!-- Start Ajax Autos -->
+	<bean id="ajaxAutoCompleteAutoAddController" class="gaa.vargas.autodealer.web.ajax.AjaxAutoCompleteAutoAddController">
+		<property name="autoDao" ref="autoDao"></property>
+	</bean>
+	<bean id="ajaxAutoCompleteAutoAddSetSessionController" class="gaa.vargas.autodealer.web.ajax.AjaxAutoCompleteAutoAddSetSessionController">
+	</bean>
+<!-- End Ajax Autos -->
+
+
+</beans>

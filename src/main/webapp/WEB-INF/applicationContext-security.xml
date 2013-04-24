@@ -1,0 +1,31 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+                        
+
+<http  auto-config="true" access-denied-page="/error/errorpage.htm" >
+
+        <intercept-url pattern="/web/admin/*" access="ROLE_ADMIN" />
+        <intercept-url pattern="/web/admin/users/*" access="ROLE_ADMIN_USERS" />
+        <intercept-url pattern="/web/admin/autos/*" access="ROLE_ADMIN_AUTOS" />
+		<intercept-url pattern="/web/admin/autospec/*" access="ROLE_ADMIN_AUTOSPEC" />
+
+        <form-login login-page="/login/login.htm" default-target-url="/index.htm" authentication-failure-url="/login/login.htm?error=true"/>
+        <logout logout-success-url="/index.htm"/>
+        <remember-me />
+        <anonymous username="guest" granted-authority="ROLE_GUEST" />
+    </http>
+
+   <authentication-manager>
+      <authentication-provider>
+        <password-encoder hash="md5" />
+            <jdbc-user-service data-source-ref="dataSource"/>
+      </authentication-provider>
+   </authentication-manager>
+
+
+                        
+</beans:beans>
+                        

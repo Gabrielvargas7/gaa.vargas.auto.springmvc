@@ -1,0 +1,377 @@
+/* 
+    Document   : mycss
+    Created on : Feb 3, 2010, 4:58:01 PM
+    Author     : gabriel
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body 
+{
+    line-height:1.5;
+    font-size:12px;
+    color:#5A5A5A;
+    background:#fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+a {color:#006daf;}
+a:hover {color:#000;}
+a {text-decoration:none;}
+
+/*
+.borderColor
+{
+    border-color: black;
+    border-width: 1px;
+    border-style:  solid; 
+  }
+*/
+ /* Header */
+
+#header
+{
+    width:950px;
+    padding: 10px;
+    margin:0 auto;   
+}
+#headerLeft
+{
+    
+    width: 350px;
+    padding: 1px 1px 1px 1px;
+    float: left;
+}
+#headerLeft a {color: white; }
+#headerLeft a:hover {color:#ffffff;}
+
+
+
+
+#headerRight
+{
+    width:580px;
+    margin-right: 0px;
+    float: right;
+}
+#topMenu
+{
+    text-align: right;
+}
+#topMenu a:link,#topMenu a:visited
+{
+    color:gray;
+    padding:5px;
+}
+#topMenu a:hover
+{
+    color:#000;
+}
+.topMenuText
+{
+    border-left:1px solid;
+}
+
+
+
+#login input
+{
+    margin:5px;
+    border: solid;
+    border-color: gray;
+    border-width: 1px;
+    width: auto;
+    font-size: 100%
+}
+#login input:focus
+{
+    border:1px solid #006daf;
+}
+#loginSubmit input
+{
+    background-color:#FDFDFD;
+    border:2px solid #006daf;
+    cursor:pointer;
+    text-align:center;
+    color:#006daf;
+}
+
+
+#headerLine
+{
+    background: url(../images/topbluebar.gif) no-repeat;
+    padding: 7px;
+    clear:  both;
+}
+
+
+
+
+/*End Header*/
+
+/* Content */
+#content
+{
+    width:950px;
+    margin: 0px auto;
+    padding: 0px;
+
+}
+
+#wrapper {
+    width: 785px; /* 780px is just wide enough to fill and 800px screen */
+    margin: 0 auto; /* It's important to set the margin to auto if you want the layout to center */
+    text-align: left;
+    border: 1px solid #999;
+   
+}
+
+#column1, #column2, #column3, #column4 {
+    padding: 10px;  /* This sets a 10px padding on all of our content boxes */
+}
+
+#section1 {
+    float: left; /* Sets this section to the left */
+   
+    width: 385px;
+}
+
+    #column1 {
+        float: left; /* Sets this column to the left inside its section */
+        width: 167px;
+    }
+   
+    #column2 {
+        float: right; /* Sets this column to the right inside its section*/
+       
+        width: 168px;
+    }
+
+#section2 {
+    float: right; /*Sets this sectionto the right */
+    
+    width: 385px;
+}
+
+    #column3 {
+        float: left; /* Sets this column to the left inside its section */
+        
+        width: 167px;
+    }
+
+    #column4 {
+        float: right; /* Sets this column to the right inside its section*/
+        
+        width: 168px;
+    }
+
+
+#maincolumn1, #maincolumn2, #maincolumn3, #maincolumn4 {
+    padding: 10px;  /* This sets a 10px padding on all of our content boxes */
+}
+
+
+#mainsection1 {
+    float: left; /* Sets this section to the left */
+
+    width: 385px;
+}
+
+    #maincolumn1 {
+        float: left; /* Sets this column to the left inside its section */
+
+        width: 340px;
+    }
+
+    #maincolumn2 {
+        float: right; /* Sets this column to the right inside its section*/
+        width: 10px;
+    }
+#mainsection2 {
+    float: right; /*Sets this sectionto the right */
+    
+    width: 385px;
+}
+
+    #maincolumn3 {
+        float: left; /* Sets this column to the left inside its section */
+
+        width: 167px;
+    }
+
+    #maincolumn4 {
+        float: right; /* Sets this column to the right inside its section*/
+
+        width: 168px;
+    }
+
+
+
+#clearcolumns {
+   
+    clear: both;
+}
+
+/* End Content */
+
+/* Footer */
+
+#footer
+{
+    width:950px;
+    padding: 10px;
+    margin:0 auto;
+    clear: both;
+}
+#footerLine
+{
+    background: url(../images/lowbluebar.gif) no-repeat;
+    padding: 7px;
+    margin-bottom: 5px;
+   
+}
+.footerLinks
+{
+   padding: 5px 0px;
+}
+.footerLinks a:link, .footerLinks a:visited
+{
+    color: #006daf;
+    padding: 0px 25px;
+}
+.footerLinks a:hover
+{
+   color:#000;
+}
+
+
+#copyRight
+{
+    padding: 10px 0px;
+    font-size: 75%
+}
+#copyRight a:link, #copyRight.visited
+{
+   color:gray;
+}
+
+#copyRight a:hover
+{
+   color:#000;
+}
+/* End Footer */
+
+/* Login */
+
+#login
+{
+    width:950px;
+    padding: 10px;
+    margin:0 auto;
+
+}
+
+#linelogin ul { padding: 0; }
+#linelogin li { list-style: none;}
+
+
+/*End Login */
+
+/* Error*/
+.error
+{
+    font-weight: bold;
+    color:#C00;
+
+}
+/* End Error */
+
+/* sold*/
+.sold
+{
+    font-weight: bolder;
+    font-style:italic;
+    color:white;
+    background-color:red;
+    text-transform: uppercase;
+    
+}
+
+.soldAdmin
+{
+    font-weight: bolder;
+    font-style:italic;
+    color:red;
+    text-transform: uppercase;
+    
+}
+
+
+/*color label front end */ 
+.colorAutoField
+{
+	font-weight: bold;
+    color:#006daf;
+}
+.colorAutoValue
+{
+	font-weight:bold;
+	text-transform:capitalize;
+  
+}
+.autoFilterMenu a
+{
+	text-transform:capitalize;
+	font-weight:bold;
+	color:#006daf;
+	
+}
+
+.autoFilterMenu a:hover
+{
+	text-transform:capitalize;
+	font-weight:bold;
+	color:black;
+	
+}
+
+/* End Details Content */
+
+
+/* Start Details */
+
+
+#detailsWrapper {
+    width: 785px; /* 780px is just wide enough to fill and 800px screen */
+    margin: 0 auto; /* It's important to set the margin to auto if you want the layout to center */
+    text-align: left;
+    border: 1px solid #999;
+   
+}
+
+#autoDetailsColum1, #autoDetailsColum2 {
+    padding: 10px;  /* This sets a 10px padding on all of our content boxes */
+}
+	
+
+#autoDetailsColum1 {
+    float: left; /* Sets this section to the left */
+    width: 115px;
+}
+
+#autoDetailsColum2 {
+    float: right; /*Sets this sectionto the right */
+    width: 585px;
+}
+
+#autoDetailsColumClear {
+   
+    clear: both;
+}
+
+/* End Details Content */
+
